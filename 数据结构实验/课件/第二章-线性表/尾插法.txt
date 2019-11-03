@@ -1,0 +1,20 @@
+Typedef struct linklist{
+   ElemType data;
+   struct linklist *next;
+};
+
+linklist *creater(  ){
+  ElemType  ch;
+  linklist *h, *p，*r;
+  linklist *h=(linklist)malloc(sizeof(listnode));
+  r=h;
+  while((ch=getchar( ))!=‵\n′){
+    p=(listnode*)malloc(sizeof(listnode));
+    p–>data=ch;
+    r–>next=p;
+    r=p;
+  }
+  r–>next=NULL;
+  return(h);
+}//以上算法的时间复杂度T(n)=O(n)。
+

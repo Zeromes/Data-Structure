@@ -1,0 +1,36 @@
+    写一算法，将一个单链表逆转。要求在原链表上进行，
+不允许重新构造一个表。
+
+解：typedef struct node{
+     elemtype  data;
+     node *next;
+    }
+
+方法1:
+void nizhuan1(node *head)
+   { node *p,*q,*r;
+     p=head.next;
+     q=p.next;
+     p.next=NULL;
+     while(q!=NULL)
+      { r=q.next;
+        q.next=p;
+        p=q;
+        q=r;
+      }
+     head.next=p;
+   }
+
+
+方法2:
+void nizhuan2(node *head)
+   { node *p,*q;
+     p=head.next;
+     head.next=NULL;
+     while(p!=NULL)
+      { q=p;
+        p=p.next;
+        q.next=head.next;
+        head.next=q;
+      }
+    }
