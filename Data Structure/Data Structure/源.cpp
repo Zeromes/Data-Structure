@@ -1,86 +1,91 @@
 #include<iostream>
+#include<ctime>
+#include<cmath>
+#include<Windows.h>
+#include<conio.h>
 using namespace std;
-
 struct Node
 {
-	int data;
+	char data;
 	Node* next;
-	Node(int x = 0) { data = x; next = NULL; }
+	Node(char x = 0) :data(x), next(NULL) {}
 };
-
-void CreateList(Node*& Head)//创建链表
+class Queue
 {
-	Node* p = Head;
-	int temp;
-	cout << "结点个数:";
-	cin >> Head->data;
-	if (Head->data > 0)
+	Node* Front, * Rear;
+	int size;
+	int Flag;
+public:
+	Queue(int x = 0)
 	{
-		for (int i = 0; i < Head->data; i++)
+		size = x;
+		Flag = 0;
+		if (x > 0)
 		{
-			cin >> temp;
-			p->next = new Node(temp);
-			p = p->next;
-		}
-	}
-}
-
-void ShowList(Node* Head)//输出链表
-{
-	if (Head != NULL)
-	{
-		cout << Head->data << endl;
-		ShowList(Head->next);
-	}
-}
-
-void DeleteNode(Node* Head, int ItemInfo, bool Type)
-{
-	if (Type) //删除第Iteminfo个结点
-	{
-		Node* p = Head, * s;
-		for (int i = 0; i < ItemInfo - 1; i++)
-			p = p->next;
-		s = p->next;
-		p->next = s->next;
-		delete s;
-		Head->data--;
-	}
-	else    //删除值为Iteminfo的结点
-	{
-		Node* p = Head->next, * front = Head;
-		while (p != NULL)
-		{
-			if (p->data == ItemInfo)
+			Front = new Node;
+			Rear = Front;
+			Node* s = Rear;
+			for (int i = 0; i < x - 1; i++)
 			{
-				front->next = p->next;
-				delete p;
-				Head->data--;
-				p = front->next;
-				continue;
+				s->next = new Node;
+				s = s->next;
 			}
-			p = p->next;
-			front = front->next;
+			s->next = Front;
 		}
+		else abort();
 	}
+	bool EnQueue(char ch);
+	bool DeQueue(char& ch);
+};
+bool Queue::EnQueue(char ch)
+{
+	if (Flag == 1)
+		return false;
+	else
+	{
+		Rear->data = ch;
+		Rear = Rear->next;
+		Flag = -1;
+	}
+	if (Rear == Front) Flag = 1;
+	return true;
 }
-
-//删除单链表第i个结点或值为val的结点
-//bool类变量Type为true时函数功能为删除第i个结点
-//为false时函数功能为删除值为val的结点
-//头结点不参与删除
-
+bool Queue::DeQueue(char& ch)
+{
+	if (Flag == 0)
+		return false;
+	else
+	{
+		Flag = -1;
+		ch = Front->data;
+		Front = Front->next;
+	}
+	if (Rear == Front) Flag = 0;
+	return true;
+}
 int main()
 {
-	Node* List1 = new Node;
-	Node* List2 = new Node;
-	CreateList(List1);
-	DeleteNode(List1, 1, true);
-	cout << "List1:" << endl;
-	ShowList(List1->next);//头结点存储结点数，这里跳过
-	cout << "——————————" << endl;//分割线
-	CreateList(List2);
-	DeleteNode(List2, 8, false);
-	cout << "List2:" << endl;
-	ShowList(List2->next);//头结点存储结点数，这里跳过
+	srand((unsigned)time(NULL));
+	Queue a(5);
+	char ch1, ch2;
+	int Random = 1;
+	while (1)
+	{
+		if (Random)
+		{
+			Sleep(500);
+			if (_kbhit())
+			{
+				ch1 = _getwch();
+				if (a.EnQueue(ch1) == false)
+					cout << endl << "OverFlow" << endl;
+			}
+		}//进程1
+		else
+		{
+			while (a.DeQueue(ch2))
+				cout << ch2;
+		}//进程2
+		Random = rand() % 2;
+	}
 }
