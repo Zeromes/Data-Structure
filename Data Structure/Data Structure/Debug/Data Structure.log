@@ -1,3 +1,2 @@
 ﻿  源.cpp
-D:\GitHub Local\Data-Structure\Data Structure\Data Structure\源.cpp(79,18): warning C4244:  “=”: 从“wint_t”转换到“char”，可能丢失数据
-  Data Structure.vcxproj -> D:\GitHub Local\Data-Structure\Data Structure\Debug\Data Structure.exe
+  Data Structure.vcxproj -> E:\GitHub Local\Data-Structure\Data Structure\Debug\Data Structure.exe

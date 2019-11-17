@@ -1,91 +1,60 @@
 #include<iostream>
-#include<ctime>
-#include<cmath>
-#include<Windows.h>
-#include<conio.h>
+#include<string>
 using namespace std;
-struct Node
+
+struct TreeNode
 {
 	char data;
-	Node* next;
-	Node(char x = 0) :data(x), next(NULL) {}
+	TreeNode* LeftTree;
+	TreeNode* RightTree;
+	TreeNode(char x = '#') :data(x), LeftTree(NULL), RightTree(NULL) {};
 };
-class Queue
+
+void CreateTree(string Fstring, string Mstring, TreeNode*& Root)
 {
-	Node* Front, * Rear;
-	int size;
-	int Flag;
-public:
-	Queue(int x = 0)
-	{
-		size = x;
-		Flag = 0;
-		if (x > 0)
-		{
-			Front = new Node;
-			Rear = Front;
-			Node* s = Rear;
-			for (int i = 0; i < x - 1; i++)
-			{
-				s->next = new Node;
-				s = s->next;
-			}
-			s->next = Front;
-		}
-		else abort();
-	}
-	bool EnQueue(char ch);
-	bool DeQueue(char& ch);
-};
-bool Queue::EnQueue(char ch)
-{
-	if (Flag == 1)
-		return false;
+	if (Mstring[0] == '#')
+		return;
 	else
 	{
-		Rear->data = ch;
-		Rear = Rear->next;
-		Flag = -1;
+		Root = new TreeNode(Fstring[0]);
+		string LeftMstring;
+		LeftMstring.assign(Mstring, 0, Mstring.find(Fstring[0]));
+		LeftMstring += '#';
+		string RightMstring = Mstring;
+		RightMstring.erase(0, Mstring.find(Fstring[0]) + 1);
+		string LeftFstring;
+		LeftFstring.assign(Fstring, 1, LeftMstring.length() - 1);
+		LeftFstring += '#';
+		string RightFstring;
+		RightFstring.assign(Fstring, LeftMstring.length(), RightMstring.length());
+		CreateTree(LeftFstring, LeftMstring, Root->LeftTree);
+		CreateTree(RightFstring, RightMstring, Root->RightTree);
 	}
-	if (Rear == Front) Flag = 1;
-	return true;
 }
-bool Queue::DeQueue(char& ch)
+
+void ShowTree(TreeNode* Root)
 {
-	if (Flag == 0)
-		return false;
+	if (Root == NULL)
+		return;
 	else
 	{
-		Flag = -1;
-		ch = Front->data;
-		Front = Front->next;
+		ShowTree(Root->LeftTree);
+		ShowTree(Root->RightTree);
+		cout << Root->data;
 	}
-	if (Rear == Front) Flag = 0;
-	return true;
 }
+
 int main()
 {
-	srand((unsigned)time(NULL));
-	Queue a(5);
-	char ch1, ch2;
-	int Random = 1;
-	while (1)
-	{
-		if (Random)
-		{
-			Sleep(500);
-			if (_kbhit())
-			{
-				ch1 = _getwch();
-				if (a.EnQueue(ch1) == false)
-					cout << endl << "OverFlow" << endl;
-			}
-		}//进程1
-		else
-		{
-			while (a.DeQueue(ch2))
-				cout << ch2;
-		}//进程2
-		Random = rand() % 2;
-	}
+	string Fstr, Mstr;
+	cout << "请输入先根序列:";
+	cin >> Fstr;
+	cout << "请输入中根序列:";
+	cin >> Mstr;
+	Fstr = Fstr + "#";
+	Mstr = Mstr + "#";
+	TreeNode* Root;
+	CreateTree(Fstr, Mstr, Root);
+	cout << "生成树成功！该树的后根序列为:";
+	ShowTree(Root);
 }
