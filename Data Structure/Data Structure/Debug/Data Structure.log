@@ -1,2 +1,4 @@
 ﻿  源.cpp
-  Data Structure.vcxproj -> D:\GitHub Local\Data-Structure\Data Structure\Debug\Data Structure.exe
+  E:\GitHub Local\Data-Structure\Data Structure\Data Structure\源.cpp(132) : warning C4715: “NextAdj”: 不是所有的控件路径都返回值
+  E:\GitHub Local\Data-Structure\Data Structure\Data Structure\源.cpp(106) : warning C4715: “FirstAdj”: 不是所有的控件路径都返回值
+  Data Structure.vcxproj -> E:\GitHub Local\Data-Structure\Data Structure\Debug\Data Structure.exe
