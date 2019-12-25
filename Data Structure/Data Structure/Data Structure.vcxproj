@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\数据结构实验\实验5代码\BiSearchTree.cpp" />
+    <ClInclude Include="..\..\数据结构实验\参考\实验五代码\BiSearchTree.h" />
+    <ClInclude Include="..\..\数据结构实验\参考\实验五代码\BTreeNode.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\数据结构实验\实验5代码\BiSearchTree.h" />
-    <ClInclude Include="..\..\数据结构实验\实验5代码\BTreeNode.h" />
+    <ClCompile Include="..\..\数据结构实验\参考\实验五代码\BiSearchTree.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -2,7 +2,8 @@
 //
 
 #include <iostream>
-#include "stdlib.h"
+#include <cstdlib>
+using namespace std;
 
 template<class T>
 class BiSearchTree;
