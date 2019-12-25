@@ -1,7 +1,7 @@
 // BTree.cpp : Defines the entry point for the console application.
 //
 
-#include "iostream.h"
+#include <iostream>
 #include "stdlib.h"
 
 template<class T>

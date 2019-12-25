@@ -2,8 +2,9 @@
 //
 
 #include "BiSearchTree.h"
-#include "stdlib.h"
-#include "time.h"
+#include <cstdlib>
+#include <ctime>
+using namespace std;
 
 typedef int Datatype;
 #define Max 10
